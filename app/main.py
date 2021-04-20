@@ -14,8 +14,8 @@ def index():
 
 @app.post('/scrap-repos')
 async def scrapRepos(url: URL):
-    page = await requests.get(str(url.url))
-    soup = await BeautifulSoup(page.text, 'html.parser')
+    page = requests.get(str(url.url))
+    soup = BeautifulSoup(page.text, 'html.parser')
     def getTitle():
         return soup.head.find('title').text if soup.head.find('title') else None
     # Getting link to repository file/folder structure
@@ -35,11 +35,11 @@ async def scrapRepos(url: URL):
     # Mining data from files
     async def filesRepository():
         urlFilesRepository = str(url.url) + '/find/' + getIdTree()
-        pageList = await requests.get(urlFilesRepository)
-        soupList = await BeautifulSoup(pageList.text, 'html.parser')
+        pageList = requests.get(urlFilesRepository)
+        soupList =  BeautifulSoup(pageList.text, 'html.parser')
 
         string = str(url.url) + '/tree-list/' + getIdTree()
-        urlFiles = await requests.get(string)
+        urlFiles = requests.get(string)
 
         return soupList.text if soupList.text else None
 
