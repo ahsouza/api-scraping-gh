@@ -33,7 +33,7 @@ async def scrapRepos(url: URL):
         return result[-1]
 
     # Mining data from files
-    async def filesRepository():
+    def filesRepository():
         urlFilesRepository = str(url.url) + '/find/' + getIdTree()
         pageList = requests.get(urlFilesRepository)
         soupList =  BeautifulSoup(pageList.text, 'html.parser')
